@@ -1,63 +1,72 @@
-const { findUid } = global.utils;
-const regExCheckURL = /^(http|https):\/\/[^ "]+$/;
+const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
 
 module.exports = {
-	config: {
-		name: "uid",
-		version: "1.3",
-		author: "NTKhang",
-		countDown: 5,
-		role: 0,
-		description: {
-			vi: "Xem user id facebook của người dùng",
-			en: "View facebook user id of user"
-		},
-		category: "info",
-		guide: {
-			vi: "   {pn}: dùng để xem id facebook của bạn"
-				+ "\n   {pn} @tag: xem id facebook của những người được tag"
-				+ "\n   {pn} <link profile>: xem id facebook của link profile"
-				+ "\n   Phản hồi tin nhắn của người khác kèm lệnh để xem id facebook của họ",
-			en: "   {pn}: use to view your facebook user id"
-				+ "\n   {pn} @tag: view facebook user id of tagged people"
-				+ "\n   {pn} <profile link>: view facebook user id of profile link"
-				+ "\n   Reply to someone's message with the command to view their facebook user id"
-		}
-	},
+config: {
+name: "uid",
+version: "35.0.0",
+author: "Milon",
+countDown: 1,
+role: 0,
+category: "utility",
+description: "Fixed Profile Picture UID Card",
+guide: "{pn} or {pn} @mention or reply"
+},
 
-	langs: {
-		vi: {
-			syntaxError: "Vui lòng tag người muốn xem uid hoặc để trống để xem uid của bản thân"
-		},
-		en: {
-			syntaxError: "Please tag the person you want to view uid or leave it blank to view your own uid"
-		}
-	},
+onStart: async function ({ api, event }) {
+const { threadID, messageID, senderID, mentions, messageReply } = event;
 
-	onStart: async function ({ message, event, args, getLang }) {
-		if (event.messageReply)
-			return message.reply(event.messageReply.senderID);
-		if (!args[0])
-			return message.reply(event.senderID);
-		if (args[0].match(regExCheckURL)) {
-			let msg = '';
-			for (const link of args) {
-				try {
-					const uid = await findUid(link);
-					msg += `${link} => ${uid}\n`;
-				}
-				catch (e) {
-					msg += `${link} (ERROR) => ${e.message}\n`;
-				}
-			}
-			message.reply(msg);
-			return;
-		}
+const cacheDir = path.join(__dirname, "cache");
+if (!fs.existsSync(cacheDir)) fs.ensureDirSync(cacheDir);
 
-		let msg = "";
-		const { mentions } = event;
-		for (const id in mentions)
-			msg += `${mentions[id].replace("@", "")}: ${id}\n`;
-		message.reply(msg || getLang("syntaxError"));
-	}
+let targetID = senderID;
+
+if (Object.keys(mentions).length > 0) {
+targetID = Object.keys(mentions)[0];
+} else if (messageReply) {
+targetID = messageReply.senderID;
+}
+
+const timeID = Date.now();
+const imgPath = path.join(cacheDir, `uid_${targetID}_${timeID}.png`);
+
+try {
+// 🔹 ইউজার ইনফো ফেচ করা
+const userInfo = await api.getUserInfo(targetID);
+const userName = userInfo[targetID]?.name || "Facebook User";
+
+// 🔥 প্রোফাইল পিকচারের স্ট্যাটিক লিঙ্ক (যা এপিআই সহজে রিড করতে পারে)
+const realAvatar = `https://graph.facebook.com/${targetID}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+
+const text1 = encodeURIComponent(`USER: ${userName}`);
+const text2 = encodeURIComponent(`UID: ${targetID}`);
+const text3 = encodeURIComponent(`AUTHOR: MILON`);
+
+// 🔥 Popcat Card API (ব্যাকগ্রাউন্ড এবং অবতার দুটেই এখন ইমেজ শো করবে)
+const cardApi = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(realAvatar)}&text1=${text1}&text2=${text2}&text3=${text3}&avatar=${encodeURIComponent(realAvatar)}&color=800080`;
+
+const response = await axios({
+method: "GET",
+url: cardApi,
+responseType: "arraybuffer",
+timeout: 20000 // ২০ সেকেন্ড টাইমআউট যাতে ইমেজ জেনারেট হতে পারে
+});
+
+fs.writeFileSync(imgPath, Buffer.from(response.data));
+
+return api.sendMessage({
+body: `${targetID}`,
+attachment: fs.createReadStream(imgPath)
+}, threadID, () => {
+setTimeout(() => {
+if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+}, 5000);
+}, messageID);
+
+} catch (error) {
+console.log("UID ERROR:", error);
+return api.sendMessage(`UID: ${targetID}`, threadID, messageID);
+}
+}
 };
