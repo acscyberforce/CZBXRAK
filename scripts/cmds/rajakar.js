@@ -6,14 +6,31 @@ const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   config: {
     name: "rajakar",
-    version: "12.0.5",
+    version: "12.0.7",
     author: "Milon",
     countDown: 1,
     role: 0,
     category: "fun",
-    description: "Create a rajakar image by mentioning or replying to a user.",
+    usePrefix: true, 
+    description: "Admins use without prefix, others need prefix.",
     guide: {
-      en: "{pn} @mention or reply"
+      en: "rajakar @mention or reply"
+    }
+  },
+
+  onChat: async function ({ api, event, message, commandName }) {
+    const { body, senderID } = event;
+    if (!body) return;
+
+    // বটের অ্যাডমিন লিস্ট চেক করা হচ্ছে
+    const adminIDs = global.GoatBot.config.adminBot || [];
+    const isBotAdmin = adminIDs.includes(senderID);
+
+    const args = body.toLowerCase().split(" ");
+
+    // যদি ইউজার অ্যাডমিন হয় এবং শুধু কমান্ডের নাম লেখে
+    if (isBotAdmin && (args[0] === "rajakar")) {
+        return this.onStart({ api, event, message, commandName });
     }
   },
 
@@ -64,7 +81,6 @@ module.exports = {
       const buffer = canvas.toBuffer("image/png");
       fs.writeFileSync(imgPath, buffer);
 
-      // All Bengali text changed to English
       return api.sendMessage({
         body: `‎এই যে দেখেন আমাদের নতুন রাজাকার: ${userName}`,
         mentions: [{ tag: userName, id: targetID }],
