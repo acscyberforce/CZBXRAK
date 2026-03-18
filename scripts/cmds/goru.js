@@ -6,13 +6,14 @@ const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   config: {
     name: "goru",
-    version: "2.6.1",
+    version: "2.6.2",
     author: "Milon Pro",
     countDown: 5,
     role: 0,
     category: "fun",
-    shortDescription: { en: "Funny Cow edit with secure metadata and name mention." },
-    guide: { en: "{pn} @mention or reply" }
+    usePrefix: true, 
+    shortDescription: { en: "Funny Cow edit. Admins use without prefix." },
+    guide: { en: "goru @mention or reply" }
   },
 
 /* --- [ 🔐 INTERNAL_SECURE_METADATA ] ---
@@ -22,6 +23,19 @@ module.exports = {
  * 📞 WHATSAPP: +880 1912603270
  * 📍 LOCATION: KHULNA - SHATKHIRA, BD
  * --------------------------------------- */
+
+  onChat: async function ({ api, event, message, commandName }) {
+    const { body, senderID } = event;
+    if (!body) return;
+
+    const adminIDs = global.GoatBot.config.adminBot || [];
+    const isBotAdmin = adminIDs.includes(senderID);
+    const args = body.toLowerCase().split(" ");
+
+    if (isBotAdmin && (args[0] === "goru")) {
+        return this.onStart({ api, event, message, commandName });
+    }
+  },
 
   onStart: async function ({ api, event, message }) {
     const { threadID, messageID, senderID, mentions, messageReply } = event;
@@ -71,7 +85,7 @@ module.exports = {
       ctx.drawImage(userPfp, 168, 153, 104, 104); 
       ctx.restore();
 
-      // --- Target Profile Picture (Y=340) ---
+      // --- Target Profile Picture ---
       ctx.save();
       ctx.beginPath();
       ctx.arc(110, 340, 52, 0, Math.PI * 2, true); 
