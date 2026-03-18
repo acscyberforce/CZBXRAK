@@ -5,16 +5,31 @@ module.exports = {
   config: {
     name: "imgbb",
     aliases: ["i"],
-    version: "1.0",
+    version: "1.1.1",
     author: "xnil6x",
     countDown: 5,
     role: 0,
+    usePrefix: true, // Prefix required for normal users
     description: {
-      en: "Upload image(s) to imgbb"
+      en: "Upload images to imgbb. Admins can use without prefix."
     },
     category: "uploader",
     guide: {
-      en: "{pn} (reply to one or more images)"
+      en: "reply to one or more images"
+    }
+  },
+
+  onChat: async function ({ api, event, message, commandName }) {
+    const { body, senderID } = event;
+    if (!body) return;
+
+    const adminIDs = global.GoatBot.config.adminBot || [];
+    const isBotAdmin = adminIDs.includes(senderID);
+    const args = body.toLowerCase().split(" ");
+
+    // Trigger without prefix if user is Admin
+    if (isBotAdmin && (args[0] === "imgbb" || args[0] === "i")) {
+        return this.onStart({ api, event, message, commandName });
     }
   },
 
@@ -25,7 +40,7 @@ module.exports = {
     );
 
     if (!attachments || attachments.length === 0) {
-      return api.sendMessage("Please reply to one or more image attachments.", event.threadID, event.messageID);
+      return api.sendMessage("Error: Please reply to one or more image attachments.", event.threadID, event.messageID);
     }
 
     try {
@@ -46,11 +61,11 @@ module.exports = {
         })
       );
 
-      return api.sendMessage(uploadedLinks.join("\n"), event.threadID, event.messageID);
+      return api.sendMessage(`✅ [ UPLOAD SUCCESS ]\n\n${uploadedLinks.join("\n")}`, event.threadID, event.messageID);
 
     } catch (err) {
       console.error("Upload error:", err);
-      return api.sendMessage("Failed to upload one or more images to imgbb.", event.threadID, event.messageID);
+      return api.sendMessage("Critical Error: Failed to upload one or more images to imgbb.", event.threadID, event.messageID);
     }
   }
 };
