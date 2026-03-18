@@ -84,7 +84,7 @@ module.exports = {
       if (!content) return message.reply("⚠️ Please enter a message after the number.");
 
       const formMessage = {
-        body: `🔗 Milon connected group admin\n━━━━━━━━━━━━━━━━━━\n👤 From: ${senderName}\n💬 Message: ${content}\n━━━━━━━━━━━━━━━━━━\n(Reply to this message to send back!)`,
+        body: `🔗 bot admin connected group admin\n━━━━━━━━━━━━━━━━━━\n👤 From: ${senderName}\n💬 Message: ${content}\n━━━━━━━━━━━━━━━━━━\n(Reply to this message to send back!)`,
         attachment: await getStreamsFromAttachment(attachments.filter(item => mediaTypes.includes(item.type)))
       };
 
