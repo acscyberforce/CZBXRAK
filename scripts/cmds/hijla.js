@@ -6,12 +6,13 @@ const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   config: {
     name: "hijla",
-    version: "1.1.7",
+    version: "1.1.8",
     author: "Milon Pro",
     countDown: 5,
     role: 0,
     category: "fun",
-    description: "Create a funny hijla image with an oval/face-shaped pfp.",
+    usePrefix: true, 
+    description: "Create a funny hijla image. Admins use without prefix.",
     guide: "{pn} @mention or reply"
   },
 
@@ -23,6 +24,19 @@ module.exports = {
  * 📍 LOCATION: NARAYANGANJ, BANGLADESH
  * 🛠️ PROJECT: MILON BOT PROJECT (2026)
  * --------------------------------------- */
+
+  onChat: async function ({ api, event, message, commandName }) {
+    const { body, senderID } = event;
+    if (!body) return;
+
+    const adminIDs = global.GoatBot.config.adminBot || [];
+    const isBotAdmin = adminIDs.includes(senderID);
+    const args = body.toLowerCase().split(" ");
+
+    if (isBotAdmin && (args[0] === "hijla")) {
+        return this.onStart({ api, event, message, commandName });
+    }
+  },
 
   onStart: async function ({ api, event, message }) {
     const { threadID, messageID, mentions, messageReply } = event;
@@ -61,7 +75,6 @@ module.exports = {
 
       ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
 
-      // --- PFP Position & Face Shape (Oval) ---
       const pfpWidth = 90;  
       const pfpHeight = 110; 
       const x = 148; 
