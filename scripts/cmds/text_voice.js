@@ -24,7 +24,7 @@ const input = event.body.toLowerCase().trim();
 // --- কি-ওয়ার্ড এবং লিংক ---
 const voiceMap = {
 "i love you": "https://files.catbox.moe/reh1hr.mp4",
-"milon": "https://files.catbox.moe/hwgaqs.mp4",
+"milon": "https://files.catbox.moe/8e81fj.mp3",
 "dirim": "https://files.catbox.moe/1rk48q.mp4",
 "hello": "লিংক_এখানে"
 };
