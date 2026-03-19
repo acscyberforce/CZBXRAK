@@ -3,70 +3,99 @@ const fs = require("fs-extra");
 const path = require("path");
 
 module.exports = {
-config: {
-name: "uid",
-version: "35.0.0",
-author: "Milon",
-countDown: 1,
-role: 0,
-category: "utility",
-description: "Fixed Profile Picture UID Card",
-guide: "{pn} or {pn} @mention or reply"
-},
+  config: {
+    name: "uid",
+    version: "35.5.0",
+    author: "Milon",
+    countDown: 2,
+    role: 0,
+    usePrefix: true, 
+    description: "Generate a professional UID card with Name and UID. Admins use without prefix.",
+    category: "utility",
+    guide: {
+      en: "{pn} | {pn} @mention | reply"
+    }
+  },
 
-onStart: async function ({ api, event }) {
-const { threadID, messageID, senderID, mentions, messageReply } = event;
+/* --- [ 🔐 FILE_CREATOR_INFORMATION ] ---
+ * 🤖 BOT NAME: MILON BOT
+ * 👤 OWNER: MILON HASAN 
+ * 📍 LOCATION: NARAYANGANJ, BANGLADESH
+ * 🛠️ PROJECT: MILON BOT PROJECT (2026)
+ * --------------------------------------- */
 
-const cacheDir = path.join(__dirname, "cache");
-if (!fs.existsSync(cacheDir)) fs.ensureDirSync(cacheDir);
+  onChat: async function ({ api, event, message, commandName }) {
+    const { body, senderID, mentions } = event;
+    if (!body) return;
 
-let targetID = senderID;
+    const adminIDs = global.GoatBot.config.adminBot || [];
+    const isBotAdmin = adminIDs.includes(senderID);
+    const msg = body.toLowerCase().trim();
 
-if (Object.keys(mentions).length > 0) {
-targetID = Object.keys(mentions)[0];
-} else if (messageReply) {
-targetID = messageReply.senderID;
-}
+    if (isBotAdmin) {
+        // Strict Match: Just "uid" or "uid @mention"
+        if (msg === "uid") {
+            return this.onStart({ api, event, message, commandName });
+        }
+        if (msg.startsWith("uid ") && Object.keys(mentions).length > 0) {
+            return this.onStart({ api, event, message, commandName });
+        }
+    }
+  },
 
-const timeID = Date.now();
-const imgPath = path.join(cacheDir, `uid_${targetID}_${timeID}.png`);
+  onStart: async function ({ api, event }) {
+    const { threadID, messageID, senderID, mentions, messageReply } = event;
 
-try {
-// 🔹 ইউজার ইনফো ফেচ করা
-const userInfo = await api.getUserInfo(targetID);
-const userName = userInfo[targetID]?.name || "Facebook User";
+    const cacheDir = path.join(__dirname, "cache");
+    if (!fs.existsSync(cacheDir)) fs.ensureDirSync(cacheDir);
 
-// 🔥 প্রোফাইল পিকচারের স্ট্যাটিক লিঙ্ক (যা এপিআই সহজে রিড করতে পারে)
-const realAvatar = `https://graph.facebook.com/${targetID}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
+    let targetID = senderID;
+    if (Object.keys(mentions).length > 0) {
+      targetID = Object.keys(mentions)[0];
+    } else if (messageReply) {
+      targetID = messageReply.senderID;
+    }
 
-const text1 = encodeURIComponent(`USER: ${userName}`);
-const text2 = encodeURIComponent(`UID: ${targetID}`);
-const text3 = encodeURIComponent(`AUTHOR: MILON`);
+    const imgPath = path.join(cacheDir, `uid_${targetID}_${Date.now()}.png`);
+    api.setMessageReaction("⏳", messageID, () => {}, true);
 
-// 🔥 Popcat Card API (ব্যাকগ্রাউন্ড এবং অবতার দুটেই এখন ইমেজ শো করবে)
-const cardApi = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(realAvatar)}&text1=${text1}&text2=${text2}&text3=${text3}&avatar=${encodeURIComponent(realAvatar)}&color=800080`;
+    try {
+      // Fetching User Information
+      const userInfo = await api.getUserInfo(targetID);
+      const userName = userInfo[targetID]?.name || "Facebook User";
 
-const response = await axios({
-method: "GET",
-url: cardApi,
-responseType: "arraybuffer",
-timeout: 20000 // ২০ সেকেন্ড টাইমআউট যাতে ইমেজ জেনারেট হতে পারে
-});
+      const realAvatar = `https://graph.facebook.com/${targetID}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 
-fs.writeFileSync(imgPath, Buffer.from(response.data));
+      // Card setup with Name and UID
+      const text1 = encodeURIComponent(`USER: ${userName}`); 
+      const text2 = encodeURIComponent(`UID: ${targetID}`); 
+      const text3 = encodeURIComponent("AUTHOR: MILON"); 
 
-return api.sendMessage({
-body: `${targetID}`,
-attachment: fs.createReadStream(imgPath)
-}, threadID, () => {
-setTimeout(() => {
-if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
-}, 5000);
-}, messageID);
+      const cardApi = `https://api.popcat.xyz/welcomecard?background=${encodeURIComponent(realAvatar)}&text1=${text1}&text2=${text2}&text3=${text3}&avatar=${encodeURIComponent(realAvatar)}&color=800080`;
 
-} catch (error) {
-console.log("UID ERROR:", error);
-return api.sendMessage(`UID: ${targetID}`, threadID, messageID);
-}
-}
+      const response = await axios({
+        method: "GET",
+        url: cardApi,
+        responseType: "arraybuffer",
+        timeout: 25000
+      });
+
+      fs.writeFileSync(imgPath, Buffer.from(response.data));
+      api.setMessageReaction("✅", messageID, () => {}, true);
+
+      return api.sendMessage({
+        body: `${targetID}`,
+        attachment: fs.createReadStream(imgPath)
+      }, threadID, () => {
+        setTimeout(() => {
+          if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+        }, 5000);
+      }, messageID);
+
+    } catch (error) {
+      console.error("UID_CARD_ERROR:", error);
+      api.setMessageReaction("❌", messageID, () => {}, true);
+      return api.sendMessage(`UID: ${targetID}`, threadID, messageID);
+    }
+  }
 };
