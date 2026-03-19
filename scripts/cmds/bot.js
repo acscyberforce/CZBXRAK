@@ -20,7 +20,7 @@ module.exports = {
         version: "11.1.0",
         author: "Milon",
         countDown: 2,
-        role: 0,
+        role: 2,
         description: "Bot responds only to 'bot' trigger with funny dialogues or AI.",
         category: "fun",
         guide: { 
