@@ -13,7 +13,7 @@ module.exports = {
     version: "1.15",
     author: "NZ R",
     countDown: 5,
-    role: 1, // Restricted to Admins
+    role: 2, // Restricted to Admins
     shortDescription: { en: "Check system uptime and status with image" },
     longDescription: { en: "Displays the system uptime, RAM usage, CPU load, and other server details on an image." },
     category: "SYSTEM",
