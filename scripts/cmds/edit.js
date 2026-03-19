@@ -9,7 +9,7 @@ module.exports = {
     version: "1.7.0",
     author: "Milon",
     countDown: 15,
-    role: 0,
+    role: 2,
     usePrefix: true, 
     description: "Edit image using Nano AI. Admins use without prefix.",
     category: "image",
