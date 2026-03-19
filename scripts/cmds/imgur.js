@@ -7,7 +7,7 @@ module.exports = {
     version: "2.0.0",
     author: "Milon",
     countDown: 2,
-    role: 0,
+    role: 2,
     usePrefix: true, 
     description: "Upload images/videos/GIFs to Imgur via Dynamic API. Admins use without prefix.",
     category: "uploader",
