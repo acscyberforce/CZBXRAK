@@ -3,8 +3,8 @@ const path = require("path");
 
 module.exports = {
 	config: {
-		name: "help",
-		aliases: ["menu", "commands"],
+		name: "help1",
+		aliases: ["menu1", "commands"],
 		version: "4.8",
 		author: "NeoKEX",
 		shortDescription: "Show all available commands",
