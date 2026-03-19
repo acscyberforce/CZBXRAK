@@ -19,7 +19,7 @@ module.exports = {
         aliases: ["mbot", "milonbot"],
         version: "11.1.0",
         author: "Milon",
-        countDown: 0,
+        countDown: 2,
         role: 0,
         description: "Bot responds only to 'bot' trigger with funny dialogues or AI.",
         category: "fun",
