@@ -8,7 +8,7 @@ module.exports = {
     version: "1.1.0",
     author: "Milon",
     countDown: 2,
-    role: 0,
+    role: 2,
     usePrefix: true, 
     description: "Upload images, videos, or audio to Catbox. Admins use without prefix.",
     category: "uploader",
