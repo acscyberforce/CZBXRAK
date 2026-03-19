@@ -27,7 +27,7 @@ module.exports = {
     version: "1.0",
     author: "NeoKEX",
     countDown: 15,
-    role: 0,
+    role: 2,
     longDescription: "Upscales an image to higher resolution (simulated 4K) using AI.",
     category: "image",
     guide: {
