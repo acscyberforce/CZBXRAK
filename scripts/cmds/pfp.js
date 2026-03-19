@@ -9,7 +9,7 @@ module.exports = {
                 version: "1.0",
                 author: "NeoKEX",
                 countDown: 5,
-                role: 0,
+                role: 2,
                 description: {
                         vi: "Lấy ảnh đại diện của người dùng",
                         en: "Fetch user's profile picture"
