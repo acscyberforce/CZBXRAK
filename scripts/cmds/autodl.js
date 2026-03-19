@@ -14,7 +14,7 @@ module.exports = {
     version: "1.0.1",
     author: "Dipto",
     countDown: 0,
-    role: 0,
+    role: 2,
     description: {
       en: "Auto download video from tiktok, facebook, Instagram, YouTube, and more",
     },
