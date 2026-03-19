@@ -5,12 +5,12 @@ module.exports = {
   config: {
     name: "catbox",
     aliases: ["cat"],
-    version: "1.0.0",
+    version: "1.1.0",
     author: "Milon",
-    countDown: 5,
+    countDown: 2,
     role: 0,
     usePrefix: true, 
-    description: "Upload any file to Catbox. Admins use without prefix.",
+    description: "Upload images, videos, or audio to Catbox. Admins use without prefix.",
     category: "uploader",
     guide: {
       en: "reply to an image, video, or audio file"
@@ -19,9 +19,7 @@ module.exports = {
 
 /* --- [ 🔐 FILE_CREATOR_INFORMATION ] ---
  * 🤖 BOT NAME: MILON BOT
- * 👤 OWNER: MILON HASAN
- * 🔗 FACEBOOK: https://www.facebook.com/share/17uGq8qVZ9/
- * 📞 WHATSAPP: +880 1912603270
+ * 👤 OWNER: MILON HASAN 
  * 📍 LOCATION: NARAYANGANJ, BANGLADESH
  * 🛠️ PROJECT: MILON BOT PROJECT (2026)
  * --------------------------------------- */
@@ -32,44 +30,56 @@ module.exports = {
 
     const adminIDs = global.GoatBot.config.adminBot || [];
     const isBotAdmin = adminIDs.includes(senderID);
-    const args = body.toLowerCase().split(" ");
+    const msg = body.toLowerCase().trim();
 
-    if (isBotAdmin && (args[0] === "catbox" || args[0] === "cat")) {
+    // Admin Unprefix: Only triggers if message is exactly "cat" or "catbox"
+    if (isBotAdmin && (msg === "catbox" || msg === "cat")) {
         return this.onStart({ api, event, message, commandName });
     }
   },
 
   onStart: async function ({ api, event }) {
-    const attachments = event.messageReply?.attachments;
+    const { threadID, messageID, messageReply } = event;
+    const attachments = messageReply?.attachments;
 
+    // Silent failure for admin unprefix if no attachments are found
     if (!attachments || attachments.length === 0) {
-      return api.sendMessage("Error: Please reply to a file (image, video, or audio).", event.threadID, event.messageID);
+      if (!event.body.startsWith(global.GoatBot.config.prefix)) return; 
+      return api.sendMessage("❌ Error: Please reply to a file (image, video, or audio).", threadID, messageID);
     }
 
+    api.setMessageReaction("⏳", messageID, () => {}, true);
+    const uploadedLinks = [];
+
     try {
-      const uploadedLinks = await Promise.all(
-        attachments.map(async (attachment) => {
-          const response = await axios.get(attachment.url, { responseType: "arraybuffer" });
-          const formData = new FormData();
-          
-          formData.append("reqtype", "fileupload");
-          formData.append("fileToUpload", Buffer.from(response.data, "binary"), { 
-            filename: `file_${Date.now()}.${attachment.type === "photo" ? "jpg" : attachment.type === "audio" ? "mp3" : "mp4"}` 
-          });
+      for (const attachment of attachments) {
+        const response = await axios.get(attachment.url, { responseType: "arraybuffer" });
+        const formData = new FormData();
+        
+        // Setting proper file extension based on attachment type
+        const ext = attachment.type === "photo" ? "jpg" : attachment.type === "audio" ? "mp3" : "mp4";
+        
+        formData.append("reqtype", "fileupload");
+        formData.append("fileToUpload", Buffer.from(response.data, "binary"), { 
+          filename: `milon_bot_${Date.now()}.${ext}` 
+        });
 
-          const res = await axios.post("https://catbox.moe/user/api.php", formData, {
-            headers: formData.getHeaders()
-          });
+        const res = await axios.post("https://catbox.moe/user/api.php", formData, {
+          headers: formData.getHeaders()
+        });
 
-          return res.data;
-        })
-      );
+        if (res.data && typeof res.data === "string" && res.data.startsWith("http")) {
+            uploadedLinks.push(res.data);
+        }
+      }
 
-      return api.sendMessage(`✅ [ CATBOX UPLOAD SUCCESS ]\n\n${uploadedLinks.join("\n")}`, event.threadID, event.messageID);
+      api.setMessageReaction("✅", messageID, () => {}, true);
+      return api.sendMessage(`✅ [ CATBOX UPLOAD SUCCESS ]\n\n${uploadedLinks.join("\n")}`, threadID, messageID);
 
     } catch (err) {
-      console.error("Catbox Upload error:", err);
-      return api.sendMessage("Critical Error: Failed to upload to Catbox.", event.threadID, event.messageID);
+      console.error("CATBOX_UPLOAD_ERROR:", err.message);
+      api.setMessageReaction("❌", messageID, () => {}, true);
+      return api.sendMessage("❌ Critical Error: Failed to upload to Catbox server.", threadID, messageID);
     }
   }
 };
