@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    name: "help2",
+    name: "help",
     version: "2.2.0",
     author: "Milon Hasan",
     countDown: 5,
