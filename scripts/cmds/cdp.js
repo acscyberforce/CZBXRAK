@@ -7,7 +7,7 @@ module.exports = {
     version: "1.5",
     author: "saim fixed by Milon",
     countDown: 5,
-    role: 0,
+    role: 2,
     category: "image",
     shortDescription: { en: "Get random couple DP (No-Prefix)" },
     guide: { en: "Just type 'cdp'" }
