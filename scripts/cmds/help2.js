@@ -4,7 +4,7 @@ module.exports = {
     version: "2.2.0",
     author: "Milon Hasan",
     countDown: 5,
-    role: 0,
+    role: 2,
     shortDescription: { en: "Displays all available commands" },
     category: "system",
     guide: { en: "{pn} or {pn} <command_name>" }
