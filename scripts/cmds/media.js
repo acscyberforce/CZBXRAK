@@ -95,7 +95,8 @@ module.exports = {
         writer.on("finish", async () => {
           await api.unsendMessage(waitMsg.messageID).catch(() => {});
           await message.reply({
-            body: `✅ Download Complete!\n📌 Title: ${title}\n🖌️ Power by: Milon Hasan`,
+            body: `⬇️𝘿𝙊𝙒𝙉𝙇𝙊𝘼𝘿 𝘾𝙊𝙈𝙋𝙇𝙀𝙏𝙀⬇️\n📌 Title: ${title}\ 𝙋𝙊𝙒𝙀𝙍 𝘽𝙔 ⚡
+       『 𝙈𝙄𝙇𝙊𝙉 𝙃𝘼𝙎𝘼𝙉 』`,
             attachment: fs.createReadStream(filePath),
           });
           if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
