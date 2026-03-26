@@ -9,27 +9,15 @@ process.stdout.clearLine = process.stdout.clearLine || function () {};
 module.exports = {
   config: {
     name: "uptime",
-    aliases: ["runtime", "up"], // 'up' aliases added
-    version: "1.15",
+    aliases: ["runtime", "up"],
+    version: "1.10",
     author: "NZ R",
     countDown: 5,
-    role: 2, // Restricted to Admins
+    role: 0,
     shortDescription: { en: "Check system uptime and status with image" },
     longDescription: { en: "Displays the system uptime, RAM usage, CPU load, and other server details on an image." },
     category: "SYSTEM",
     guide: { en: "{pn}" }
-  },
-
-  // Prefix-free support via onChat
-  onChat: async function ({ api, event }) {
-    const { body } = event;
-    if (!body) return;
-    const cmd = body.toLowerCase().trim();
-
-    // Trigger on 'uptime', 'runtime', or 'up' without prefix
-    if (cmd === "uptime" || cmd === "runtime" || cmd === "up") {
-        return this.onStart({ api, event });
-    }
   },
 
   onStart: async function ({ api, event }) {
