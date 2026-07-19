@@ -21,9 +21,9 @@ module.exports = {
 
   onStart: async function ({ message }) {
 
-    const ownerName = "STARBOY Milon";
+    const ownerName = "STARBOY TONMOY";
     const ownerAge = "N/A";
-    const ownerFB = "https://www.facebook.com/share/17uGq8qVZ9/";
+    const ownerFB = "https://www.facebook.com/61591668287353";
     const ownerNumber = "+88019XXXXXXX";
     const status = "Active";
 
@@ -34,7 +34,7 @@ module.exports = {
     const totalCommands = global.GoatBot?.commands?.size || 0;
 
     const images = [
-      "https://files.catbox.moe/i7ehq1.mp4"
+      "https://files.catbox.moe/tlisu5.mp4"
     ];
     const image = images[Math.floor(Math.random() * images.length)];
 
@@ -53,7 +53,7 @@ module.exports = {
       body: `
 ╔═《 ✨ 𝗢𝗪𝗡𝗘𝗥 & 𝗕𝗢𝗧 𝗜𝗡𝗙𝗢 ✨ 》═╗
 
-⭓ 🤖 𝗕𝗼𝘁 𝗡𝗮𝗺𝗲   : 『 𝗠𝗜𝗟𝗢𝗡 𝗕𝗢𝗧 』
+⭓ 🤖 𝗕𝗼𝘁 𝗡𝗮𝗺𝗲   : 『 𝗧𝗢𝗡𝗠𝗢𝗬 𝗕𝗔𝗕𝗬 』
 ⭓ ☄️ 𝗣𝗿𝗲𝗳𝗶𝘅      : 『. 』
 ⭓ 🧠 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀    : 『 ${totalCommands} 』
 ⭓ ⚡ 𝗨𝗽𝘁𝗶𝗺𝗲      : 『 ${uptimeString} 』
@@ -61,9 +61,9 @@ module.exports = {
 ⭓ ⏰ 𝗧𝗶𝗺𝗲        : 『 ${time} 』
 
 ⭓ 👑 𝗢𝘄𝗻𝗲𝗿      : 『 𝗠𝗶𝗹𝗼𝗻 𝗛𝗮𝘀𝗮𝗻 』
-⭓ 🎂 𝗔𝗴𝗲        : 『 17+』
+⭓ 🎂 𝗔𝗴𝗲        : 『 23』
 ⭓ ❤️ 𝗦𝘁𝗮𝘁𝘂𝘀     : 『 silence is my attitude 』
-⭓ 📱 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽  : 『880 1912603270 』
+⭓ 📱 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽  : 『880 19******* 』
 ⭓ 🌐 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸  : 『 আ্ঁসো্ঁ ক্ঁট্ঁ খা্ঁই্ঁ🥵⎯⃝💦⎯⃝🤧⎯⃝🤭 ধ্ঁরা্ঁ প্ঁড়্ঁলে্ঁ-)সোনা 🤌(-𝙅𝙖𝙢𝙖𝙞•|•𝘽𝙤𝙬⎯͢⎯⃝🩵☺️🐰 』
 
 ╚══════════════════════════╝
