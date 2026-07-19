@@ -16,11 +16,11 @@ module.exports = {
   },
 
 /* --- [ 🔐 FILE_CREATOR_INFORMATION ] ---
- * 🤖 BOT NAME: MILON BOT
- * 👤 OWNER: MILON ISLAM (MILON BOSS)
- * 🔗 FB: https://www.facebook.com/share/17uGq8qVZ9/
- * 📍 LOCATION: NARAYANGANJ, BANGLADESH
- * 🛠️ PROJECT: MILON BOT PROJECT (2026)
+ * 🤖 BOT NAME: CZB TONMOY BOT
+ * 👤 OWNER: TONMOY CHOWDHURY
+ * 🌐 BRAND: CYBER ZONE BD
+ * 📍 LOCATION: BANGLADESH
+ * 🛠️ PROJECT: CZB TONMOY BOT (2026)
  * --------------------------------------- */
 
   onChat: async function ({ api, event, message }) {
