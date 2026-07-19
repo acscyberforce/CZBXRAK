@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/5XqYnC7.jpeg" alt="banner">
+<img src="[[https://i.imgur.com/5XqYnC7.jpeg](https://files.catbox.moe/c00ufo.jpg)](https:" alt="banner">
 <h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px">   𝐂𝐙𝐁 𝐓𝐎𝐍𝐌𝐎𝐘 𝗕𝗢𝗧</h1>
 <!-- Github README -->
 
