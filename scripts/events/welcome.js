@@ -1,445 +1,178 @@
-const {
-    createCanvas,
-    loadImage,
-    registerFont
-} = require('canvas');
+const { createCanvas, loadImage } = require('canvas');
 const fs = require('fs-extra');
 const path = require('path');
-const { getTime, drive } = global.utils;
 
-const fontDir = process.cwd() + "/scripts/cmds/assets/font";
-const canvasFontDir = process.cwd() + "/scripts/cmds/canvas/fonts";
+async function createWelcomeCanvas(gcImg, avatar, userName, memberCount, threadName) {
+const width = 1000;
+const height = 500;
+const canvas = createCanvas(width, height);
+const ctx = canvas.getContext('2d');
 
-registerFont(path.join(fontDir, "NotoSans-Bold.ttf"), {
-    family: 'NotoSans',
-    weight: 'bold'
-});
+ctx.fillStyle = "#0d0d0d";
+ctx.fillRect(0, 0, width, height);
 
-registerFont(path.join(fontDir, "NotoSans-SemiBold.ttf"), {
-    family: 'NotoSans',
-    weight: '600'
-});
+ctx.strokeStyle = "rgba(0,255,150,0.1)";
+for (let i = 0; i < width; i += 40) {
+ctx.beginPath();
+ctx.moveTo(i, 0);
+ctx.lineTo(i, height);
+ctx.stroke();
+}
 
-registerFont(path.join(fontDir, "NotoSans-Regular.ttf"), {
-    family: 'NotoSans',
-    weight: 'normal'
-});
+ctx.beginPath();
+ctx.arc(width / 2, height / 2, 180, 0, Math.PI * 2);
+const grad = ctx.createRadialGradient(
+width / 2,
+height / 2,
+50,
+width / 2,
+height / 2,
+200
+);
+grad.addColorStop(0, "rgba(0,255,150,0.3)");
+grad.addColorStop(1, "transparent");
+ctx.fillStyle = grad;
+ctx.fill();
 
-registerFont(path.join(fontDir, "BeVietnamPro-Bold.ttf"), {
-    family: 'BeVietnamPro',
-    weight: 'bold'
-});
+try {
+const img = await loadImage(avatar);
 
-registerFont(path.join(fontDir, "BeVietnamPro-SemiBold.ttf"), {
-    family: 'BeVietnamPro',
-    weight: '600'
-});
+ctx.save();
+ctx.beginPath();
+ctx.arc(width / 2, 180, 90, 0, Math.PI * 2);
+ctx.closePath();
+ctx.clip();
+ctx.drawImage(img, width / 2 - 90, 90, 180, 180);
+ctx.restore();
 
-registerFont(path.join(fontDir, "BeVietnamPro-Regular.ttf"), {
-    family: 'BeVietnamPro',
-    weight: 'normal'
-});
+} catch {}
 
-registerFont(path.join(fontDir, "Kanit-SemiBoldItalic.ttf"), {
-    family: 'Kanit',
-    weight: '600',
-    style: 'italic'
-});
+ctx.textAlign = "center";
 
-registerFont(path.join(canvasFontDir, "Rounded.otf"), {
-    family: 'Rounded'
-});
+ctx.fillStyle = "#00ff9c";
+ctx.font = "bold 40px Sans";
+ctx.fillText("WELCOME", width / 2, 330);
 
-async function createWelcomeCanvas(gcImg, img1, img2, userName, userNumber, threadName, potato) {
-    const width = 1200;
-    const height = 600;
-    const canvas = createCanvas(width, height);
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#0a0a0a';
-    ctx.fillRect(0, 0, width, height);
+ctx.fillStyle = "#ffffff";
+ctx.font = "28px Sans";
+ctx.fillText(userName, width / 2, 380);
 
-    function fitAndSetFont(family, weight, maxSize, minSize, text, maxWidth, style = '') {
-        let size = maxSize;
-        for (; size >= minSize; size -= 1) {
-            ctx.font = `${style ? style + ' ' : ''}${weight} ${size}px ${family}`;
-            if (ctx.measureText(text).width <= maxWidth) break;
-        }
-        ctx.font = `${style ? style + ' ' : ''}${weight} ${Math.max(size, minSize)}px ${family}`;
-        return Math.max(size, minSize);
-    }
-    function drawTextWithStroke(text, x, y, align = 'left') {
-        ctx.textAlign = align;
-        ctx.strokeStyle = 'rgba(0,0,0,0.65)';
-        ctx.lineWidth = 4;
-        ctx.strokeText(text, x, y);
-        ctx.fillText(text, x, y);
-    }
+ctx.fillStyle = "#aaaaaa";
+ctx.font = "20px Sans";
+ctx.fillText("Member #${memberCount}", width / 2, 420);
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.lineWidth = 2;
-    for (let i = -height; i < width; i += 60) {
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i + height, height);
-        ctx.stroke();
-    }
-    const lightGradient = ctx.createLinearGradient(0, 0, width, height);
-    lightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.02)');
-    lightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.05)');
-    lightGradient.addColorStop(1, 'rgba(255, 255, 255, 0.02)');
-    ctx.fillStyle = lightGradient;
-    ctx.fillRect(0, 0, width, height);
-    const squares = [{
-        x: 50,
-        y: 50,
-        size: 80,
-        rotation: 15
-    },
-        {
-            x: 1100,
-            y: 80,
-            size: 60,
-            rotation: -20
-        },
-        {
-            x: 150,
-            y: 500,
-            size: 50,
-            rotation: 30
-        },
-        {
-            x: 1050,
-            y: 480,
-            size: 70,
-            rotation: -15
-        },
-        {
-            x: 900,
-            y: 30,
-            size: 40,
-            rotation: 45
-        },
-        {
-            x: 200,
-            y: 150,
-            size: 35,
-            rotation: -30
-        },
-        {
-            x: 400,
-            y: 80,
-            size: 45,
-            rotation: 60
-        },
-        {
-            x: 700,
-            y: 520,
-            size: 55,
-            rotation: -40
-        },
-        {
-            x: 950,
-            y: 250,
-            size: 38,
-            rotation: 25
-        },
-        {
-            x: 300,
-            y: 350,
-            size: 42,
-            rotation: -50
-        }];
+ctx.fillStyle = "#00ff9c";
+ctx.font = "18px Sans";
+ctx.fillText(threadName, width / 2, 460);
 
-    squares.forEach(sq => {
-        ctx.save();
-        ctx.translate(sq.x + sq.size / 2, sq.y + sq.size / 2);
-        ctx.rotate((sq.rotation * Math.PI) / 180);
-
-        const sqGradient = ctx.createLinearGradient(-sq.size / 2, -sq.size / 2, sq.size / 2, sq.size / 2);
-        sqGradient.addColorStop(0, 'rgba(34, 197, 94, 0.3)');
-        sqGradient.addColorStop(1, 'rgba(22, 163, 74, 0.1)');
-
-        ctx.fillStyle = sqGradient;
-        ctx.fillRect(-sq.size / 2, -sq.size / 2, sq.size, sq.size);
-
-        ctx.strokeStyle = 'rgba(34, 197, 94, 0.5)';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(-sq.size / 2, -sq.size / 2, sq.size, sq.size);
-
-        ctx.restore();
-    });
-    const circles = [{
-        x: 250,
-        y: 250,
-        radius: 30,
-        alpha: 0.15
-    },
-        {
-            x: 850,
-            y: 150,
-            radius: 25,
-            alpha: 0.12
-        },
-        {
-            x: 600,
-            y: 50,
-            radius: 20,
-            alpha: 0.1
-        },
-        {
-            x: 100,
-            y: 350,
-            radius: 35,
-            alpha: 0.18
-        },
-        {
-            x: 1000,
-            y: 380,
-            radius: 28,
-            alpha: 0.14
-        },
-        {
-            x: 450,
-            y: 480,
-            radius: 22,
-            alpha: 0.11
-        }];
-
-    circles.forEach(circ => {
-        ctx.beginPath();
-        ctx.arc(circ.x, circ.y, circ.radius, 0, Math.PI * 2);
-        const circGradient = ctx.createRadialGradient(circ.x, circ.y, 0, circ.x, circ.y, circ.radius);
-        circGradient.addColorStop(0, `rgba(34, 197, 94, ${circ.alpha})`);
-        circGradient.addColorStop(1, 'rgba(22, 163, 74, 0)');
-        ctx.fillStyle = circGradient;
-        ctx.fill();
-
-        ctx.strokeStyle = `rgba(34, 197, 94, ${circ.alpha * 2})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-    });
-    const triangles = [{
-        x: 550,
-        y: 150,
-        size: 40,
-        rotation: 0
-    },
-        {
-            x: 180,
-            y: 420,
-            size: 35,
-            rotation: 180
-        },
-        {
-            x: 1080,
-            y: 320,
-            size: 38,
-            rotation: 90
-        },
-        {
-            x: 380,
-            y: 200,
-            size: 32,
-            rotation: -45
-        }];
-
-    triangles.forEach(tri => {
-        ctx.save();
-        ctx.translate(tri.x, tri.y);
-        ctx.rotate((tri.rotation * Math.PI) / 180);
-
-        ctx.beginPath();
-        ctx.moveTo(0, -tri.size / 2);
-        ctx.lineTo(-tri.size / 2, tri.size / 2);
-        ctx.lineTo(tri.size / 2, tri.size / 2);
-        ctx.closePath();
-
-        const triGradient = ctx.createLinearGradient(-tri.size / 2, 0, tri.size / 2, 0);
-        triGradient.addColorStop(0, 'rgba(34, 197, 94, 0.2)');
-        triGradient.addColorStop(1, 'rgba(22, 163, 74, 0.1)');
-        ctx.fillStyle = triGradient;
-        ctx.fill();
-
-        ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        ctx.restore();
-    });
-
-    async function drawCircularImage(imageSrc, x, y, radius, borderColor, borderWidth = 5) {
-        try {
-            const image = await loadImage(imageSrc);
-            ctx.shadowColor = borderColor;
-            ctx.shadowBlur = 15;
-            ctx.beginPath();
-            ctx.arc(x, y, radius + borderWidth, 0, Math.PI * 2);
-            ctx.fillStyle = borderColor;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.beginPath();
-            ctx.arc(x, y, radius + borderWidth, 0, Math.PI * 2);
-            ctx.fillStyle = borderColor;
-            ctx.fill();
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.clip();
-            ctx.drawImage(image, x - radius, y - radius, radius * 2, radius * 2);
-            ctx.restore();
-        } catch (err) {
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#1f1f1f';
-            ctx.fill();
-        }
-    }
-    
-    await drawCircularImage(img2, width - 120, 100, 55, '#22c55e');
-    fitAndSetFont('"NotoSans", "BeVietnamPro", sans-serif', 'bold', 22, 14, 'Added by ' + potato, 320);
-    ctx.fillStyle = '#22c55e';
-    ctx.textAlign = 'right';
-    drawTextWithStroke('Added by ' + potato, width - 190, 105, 'right');
-    await drawCircularImage(img1, 120, height - 100, 55, '#16a34a');
-    fitAndSetFont('"NotoSans", "BeVietnamPro", sans-serif', 'bold', 28, 16, userName, width - 250);
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'left';
-    drawTextWithStroke(userName, 190, height - 95, 'left');
-    await drawCircularImage(gcImg, width / 2, 200, 90, '#22c55e', 6);
-    fitAndSetFont('"NotoSans", "BeVietnamPro", sans-serif', '600', 42, 20, threadName, width * 0.8);
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'center';
-    drawTextWithStroke(threadName, width / 2, 335, 'center');
-    fitAndSetFont('"Kanit", "NotoSans", sans-serif', '600', 56, 28, 'WELCOME', width * 0.9, 'italic');
-    const nameGradient = ctx.createLinearGradient(width / 2 - 200, 0, width / 2 + 200, 0);
-    nameGradient.addColorStop(0, '#4ade80');
-    nameGradient.addColorStop(1, '#22c55e');
-    ctx.fillStyle = nameGradient;
-    drawTextWithStroke('WELCOME', width / 2, 410, 'center');
-    ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(width / 2 - 180, 430);
-    ctx.lineTo(width / 2 + 180, 430);
-    ctx.stroke();
-    fitAndSetFont('"NotoSans", "BeVietnamPro", sans-serif', '600', 26, 16, `You are the ${userNumber}th member`, width * 0.9);
-    ctx.fillStyle = '#a0a0a0';
-    ctx.textAlign = 'center';
-    drawTextWithStroke(`You are the ${userNumber}th member`, width / 2, 480, 'center');
-
-    return canvas.createPNGStream();
+return canvas.toBuffer();
 }
 
 module.exports = {
-    config: {
-        name: "welcome",
-        version: "1.3",
-        author: "Neoaz ゐ",//Adapted from @procoder Allou Mohammed
-        category: "events"
-    },
-    
-    langs: {
-        vi: {
-            session1: "sáng",
-            session2: "trưa",
-            session3: "chiều",
-            session4: "tối",
-            defaultWelcomeMessage: "Chào mừng {userName} đến với {boxName}"
-        },
-        en: {
-            session1: "morning",
-            session2: "noon",
-            session3: "afternoon",
-            session4: "evening",
-            defaultWelcomeMessage: "Welcome {userName} to {boxName}"
-        }
-    },
+config: {
+name: "welcome",
+version: "3.0",
+author: "TONMOY",
+category: "events"
+},
 
-    onStart: async ({
-        threadsData, event, message, usersData, getLang
-    }) => {
-        const type = "log:subscribe";
-        if (event.logMessageType != type) return;
-        
-        try {
-            await threadsData.refreshInfo(event.threadID);
-            const threadsInfo = await threadsData.get(event.threadID);
-            if (!threadsInfo.settings.sendWelcomeMessage)
-                return;
-            const gcImg = threadsInfo.imageSrc;
-            const threadName = threadsInfo.threadName;
-            const addedList = event.logMessageData.addedParticipants || [];
-            const joined = addedList[0]?.userFbId;
-            const by = event.author;
-            if (!joined) return;
-            const img1 = await usersData.getAvatarUrl(joined).catch(() => null);
-            const img2 = await usersData.getAvatarUrl(by).catch(() => null);
-            const usernumber = threadsInfo.members?.length || 1;
-            const userName = event.logMessageData.addedParticipants[0].fullName || (await usersData.getName(joined));
-            const authorN = await usersData.getName(by);
-            
-            const welcomeImage = await createWelcomeCanvas(gcImg, img1, img2, userName, usernumber, threadName, authorN);
-            
-            const imagePath = path.join(__dirname, '../cmds/', global.utils.randomString(4) + ".png");
-            const writeStream = fs.createWriteStream(imagePath);
-            welcomeImage.pipe(writeStream);
-            
-            await new Promise((resolve) => {
-                writeStream.on('finish', resolve);
-            });
+onStart: async ({ event, message, usersData, threadsData }) => {
+if (event.logMessageType !== "log:subscribe") return;
 
-            const hours = getTime("HH");
-            const data = threadsInfo.data || {};
-            let { welcomeMessage = getLang("defaultWelcomeMessage") } = data;
+try {
+  const thread = await threadsData.get(event.threadID);
+  const added = event.logMessageData.addedParticipants[0];
 
-            const names = await Promise.all(addedList.map(p => usersData.getName(p.userFbId)));
-            const nameJoined = names.join(", ");
+  const uid = added.userFbId;
+  const name = added.fullName || await usersData.getName(uid);
+  const avatar = await usersData.getAvatarUrl(uid);
 
-            const multipleText = addedList.length > 1 ? "you guys" : "you";
+  const threadName = thread.threadName || "GROUP";
+  const memberCount = thread.members?.length || 1;
 
-            const form = {};
-            if (welcomeMessage.includes("{userNameTag}")) {
-                form.mentions = [{
-                    id: joined,
-                    tag: userName
-                }];
-            }
+  const welcomeTime = new Date().toLocaleString("en-BD", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+  });
 
-            welcomeMessage = (welcomeMessage || "")
-                .replace(/\{userName\}/g, nameJoined)
-                .replace(/\{userNameTag\}/g, userName)
-                .replace(/\{threadName\}|\{boxName\}/g, threadName)
-                .replace(/\{time\}/g, hours)
-                .replace(/\{multiple\}/g, multipleText)
-                .replace(/\{session\}/g, hours <= 10
-                    ? getLang("session1")
-                    : hours <= 12
-                        ? getLang("session2")
-                        : hours <= 18
-                            ? getLang("session3")
-                            : getLang("session4")
-                );
+  const buffer = await createWelcomeCanvas(
+    thread.imageSrc,
+    avatar,
+    name,
+    memberCount,
+    threadName
+  );
 
-            form.body = welcomeMessage;
+  const filePath = path.join(__dirname, "welcome.png");
+  fs.writeFileSync(filePath, buffer);
 
-            const attachments = [];
-            if (threadsInfo.data?.welcomeAttachment && Array.isArray(threadsInfo.data.welcomeAttachment)) {
-                const files = threadsInfo.data.welcomeAttachment;
-                const fromDrive = await Promise.allSettled(files.map(file => drive.getFile(file, "stream")));
-                for (const r of fromDrive)
-                    if (r.status == "fulfilled")
-                        attachments.push(r.value);
-            }
-            attachments.push(fs.createReadStream(imagePath));
-            form.attachment = attachments;
+  const msg = `
 
-            await message.send(form);
-            
-            fs.unlink(imagePath).catch(() => {});
-        } catch (error) {
-            console.error("[WELCOME] Error:", error.message);
-            console.error(error.stack);
-        }
-    }
+╔══════════════════════╗
+🎉 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 🎉
+╚══════════════════════╝
+
+👋 Hello ${name}
+
+🏠 Group: ${threadName}
+👥 Member No: ${memberCount}
+🆔 UID: ${uid}
+
+⏰ Welcome Time
+╭────────────────╮
+│ ${welcomeTime}
+╰────────────────╯
+
+━━━━━━━━━━━━━━━━━━
+
+🌺 আসসালামু আলাইকুম 🌺
+
+💖 ${threadName} পরিবারে আপনাকে স্বাগতম।
+
+📜 𝗚𝗥𝗢𝗨𝗣 𝗥𝗨𝗟𝗘𝗦
+
+🔹 Spam করা যাবে না
+🔹 Admin-দের সম্মান করুন
+🔹 কাউকে অপমান করবেন না
+🔹 অশ্লীল Content নিষিদ্ধ
+🔹 গ্রুপের পরিবেশ সুন্দর রাখুন
+🔹 ধর্মীয় ও সামাজিক মূল্যবোধ বজায় রাখুন
+
+━━━━━━━━━━━━━━━━━━
+
+🤝 Respect Everyone
+💬 Stay Active
+🔥 Enjoy Your Stay
+
+━━━━━━━━━━━━━━━━━━
+
+✨ Welcome To ${threadName} ✨
+
+❤️ Have A Nice Day ❤️
+`;
+
+  await message.send({
+    body: msg,
+    mentions: [
+      {
+        tag: name,
+        id: uid
+      }
+    ],
+    attachment: fs.createReadStream(filePath)
+  });
+
+  fs.unlinkSync(filePath);
+
+} catch (err) {
+  console.error("WELCOME ERROR:", err);
+}
+
+}
 };
