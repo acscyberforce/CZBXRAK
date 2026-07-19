@@ -7,8 +7,8 @@ module.exports = {
   config: {
     name: "chipay",
     aliases: ["corner", "muri"],
-    version: "2.4.9",
-    author: "Milon",
+    version: "2.5.0",
+    author: "Tonmoy", // Updated author name
     countDown: 5,
     role: 0,
     shortDescription: "Fun command with image and stylish caption",
@@ -28,16 +28,12 @@ module.exports = {
     } else if (messageReply) {
       targetID = messageReply.senderID;
     } else {
-      // User not mentioned warning (Bangla)
-      return api.sendMessage("🤦‍♂️ | আরে ভাই, কাকে চিপায় নিবেন তারে তো মেনশন দেন নাই!", threadID, messageID);
+      return api.sendMessage("🤖 | আরে ভাই! চিপায় কারে নিবেন? কাউরে তো মেনশন বা রিপ্লাই করলেন না! 🤷‍♂️", threadID, messageID);
     }
 
 /* --- [ 🔐 INTERNAL_SECURE_METADATA ] ---
- * 🤖 BOT NAME: MILON BOT
- * 👤 OWNER: MILON HASAN
- * 🔗 FACEBOOK: https://www.facebook.com/share/17uGq8qVZ9/
- * 📞 WHATSAPP: +880 1912603270
- * 📍 LOCATION: NARAYANGANJ, BD
+ * 🤖 BOT NAME: TONMOY BOT
+ * 👤 OWNER: TONMOY
  * --------------------------------------- */
 
     const imgPath = path.join(cacheDir, `chipay_${Date.now()}.png`);
@@ -46,8 +42,8 @@ module.exports = {
       const userInfo = await api.getUserInfo(targetID);
       const targetName = userInfo[targetID]?.name || "User";
 
-      // Preparation Message (Bangla)
-      api.sendMessage("⏳ | একটু দাঁড়ান, চিপায় ঝালমুড়ি খাওয়ার ব্যাবস্থা করতেছি... 😋", threadID, messageID);
+      // Preparation Message 
+      api.sendMessage("✨ | একটু অপেক্ষা করুন... চিপায় নিয়ে স্পেশাল ঝালমুড়ি মাখানো হচ্ছে! 🌶️🤤", threadID, messageID);
 
       const backgroundUrl = "https://i.imgur.com/PlmZXfJ.jpeg";
       const accessToken = "6628568379|c1e620fa708a1d5696fb991c1bde5662"; 
@@ -65,38 +61,41 @@ module.exports = {
 
       ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
 
-      // --- Draw Box and Name inside Image ---
-      ctx.font = "bold 18px Arial"; 
+      // --- Draw Unique Rounded Box and Name inside Image ---
+      ctx.font = "bold 20px 'Segoe UI', Arial, sans-serif"; 
       const textWidth = ctx.measureText(targetName).width;
-      const textX = canvas.width - 100;
-      const textY = canvas.height - 103;
-
-      const padding = 10;
-      const boxWidth = textWidth + padding * 2;
-      const boxHeight = 28;
-      const boxX = textX - boxWidth; 
-      const boxY = textY - 20;
-
-      // Draw Background Box
-      ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; 
-      ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
       
-      // Draw Box Border
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 1;
-      ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+      const paddingX = 15;
+      const paddingY = 8;
+      const boxWidth = textWidth + paddingX * 2;
+      const boxHeight = 35;
+      
+      // Position calculation for bottom right corner
+      const boxX = canvas.width - boxWidth - 30; 
+      const boxY = canvas.height - 120;
+
+      // Draw Beautiful Rounded Background Box
+      ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 8) : ctx.rect(boxX, boxY, boxWidth, boxHeight);
+      ctx.fill();
+
+      // Draw White Border
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
 
       // Draw Mention Name
       ctx.fillStyle = "#FFFFFF"; 
-      ctx.textAlign = "right"; 
-      const drawTextX = textX - padding;
-      
-      ctx.fillText(targetName, drawTextX, textY);
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText(targetName, boxX + paddingX, boxY + (boxHeight / 2));
 
+      // --- Avatar Configurations ---
       const avatarSizeLeft = 110; 
       const avatarSizeUser = 95; 
 
-      // --- Left Side (Target) ---
+      // --- Left Side (Target Avatar) ---
       const xLeft = 85, yLeft = 85; 
       ctx.save();
       ctx.beginPath();
@@ -106,7 +105,7 @@ module.exports = {
       ctx.drawImage(avtLeft, xLeft, yLeft, avatarSizeLeft, avatarSizeLeft);
       ctx.restore();
 
-      // --- Right Side (Sender) ---
+      // --- Right Side (Sender Avatar) ---
       const xRight = 350, yRight = 100; 
       ctx.save();
       ctx.beginPath();
@@ -119,8 +118,8 @@ module.exports = {
       const buffer = canvas.toBuffer("image/png");
       fs.writeFileSync(imgPath, buffer);
 
-      // Final Output Caption (Bangla Style)
-      const caption = `😾⎯͢⎯⃝⋆⃝চিঁপাঁয়ঁ আঁয়ঁ ঝাঁলঁমুঁড়িঁ বাঁনাঁয়ঁছিঁ🙈 ⋆⃝⋆⃝😹😒⋆🐰🍒\n\n${targetName} এ্ঁদি্ঁকে্ঁ আ্ঁসো্ঁ 💋💋`;
+      // Unique Stylized Caption (Edit by Tonmoy)
+      const caption = `🎭 ⎯͢⎯⃝✨ ❝চিপায় আয় ঝালমুড়ি খাই, তোর মতো ফ্রেন্ড আর কোথাও নাই!❞ 🤭🌾\n\n🥵 শুনো ${targetName}, বেশি কথা না বলে চিপায় আসো! 🫣🔥`;
 
       return api.sendMessage({
         body: caption,
@@ -132,7 +131,7 @@ module.exports = {
 
     } catch (error) {
       console.log("CHIPAY ERROR:", error);
-      return api.sendMessage("❌ | Error! Failed to process image. Please try again.", threadID, messageID);
+      return api.sendMessage("❌ | দুঃখিত! ইমেজ প্রসেস করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।", threadID, messageID);
     }
   }
 };
