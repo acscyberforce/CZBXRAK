@@ -3,36 +3,45 @@ const axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
 
+/**
+ * -----------------------------------------------------------------
+ * 💥 MEDIA INTRUSION BY: TONMOY HACKER
+ * 🤖 BOT SYSTEM OPERACLE: YOUTUBE MEDIA EXTRACTOR
+ * 👤 MASTERMIND: TIGER TONMOY (BD HACKER)
+ * 📍 TARGET CORE: STREAM BUFFERING DEPLOYMENT (2026)
+ * -----------------------------------------------------------------
+ */
+
 module.exports = {
   config: {
     name: "video",
-    version: "2.2.2",
-    author: "Milon Pro",
+    version: "2.6.6", // Cyber Upgrade
+    author: "TONMOY HACKER",
     countDown: 5,
     role: 0,
-    shortDescription: "Search & download YouTube videos",
-    longDescription: "Search YouTube videos by name and download without prefix",
-    category: "media",
+    shortDescription: "Bypass & extract YouTube media frames.",
+    longDescription: "Breach YouTube servers to extract and download visual data packets without prefix layers.",
+    category: "cyber_media",
     guide: {
-      en: "video <video name>"
+      en: "video <target packet name>"
     }
   },
 
   onStart: async function ({ api, event, args }) {
     const { threadID, messageID, body } = event;
-    const creatorName = "Milon Islam";
+    const hackerAlias = "TONMOY HACKER";
 
     let query = args.join(" ");
-    
-    // Handling No-prefix input
+
+    // Handling No-prefix network input
     if (!query && body) {
       query = body.replace(/^video\s+/i, "").trim();
     }
 
-    // Your requested English error message and example
+    // Syntax validation alert
     if (!query || query.toLowerCase() === "video") {
       return api.sendMessage(
-        `❌ Please provide a song name.\n📌 Example: video Let Me Love You`,
+        `❌ [ACCESS DENIED]: Missing data footprint!\n📌 Protocol Example: video Let Me Love You`,
         threadID,
         messageID
       );
@@ -42,36 +51,36 @@ module.exports = {
 
     try {
       const searching = await api.sendMessage(
-        `🔍 Searching\n━━━━━━━━━━━━━━━\n📌 Query: ${query}\n⏳ Please wait...`,
+        `📡 INJECTING SEARCH BEACON\n┌────────────────────────┐\n🔍 Target Query: ${query}\n⏳ Locating data packets...`,
         threadID
       );
       tempMsgID = searching.messageID;
 
-      // Searching using BetaDash API
+      // Hacking search parameters via BetaDash API
       const searchRes = await axios.get(
         `https://betadash-search-download.vercel.app/yt?search=${encodeURIComponent(query)}`
       );
 
       const video = searchRes.data?.[0];
-      if (!video || !video.url) throw new Error("No results found.");
+      if (!video || !video.url) throw new Error("Target mainframe returned empty packet arrays.");
 
       await api.unsendMessage(tempMsgID).catch(() => {});
 
       const downloading = await api.sendMessage(
-        `🎬 Video Found\n━━━━━━━━━━━━━━━\n📖 Title: ${video.title}\n⬇️ Downloading...`,
+        `🎯 TARGET BREACHED\n┌────────────────────────┐\n📖 Title: ${video.title}\n⬇️ Extracting buffer streams...`,
         threadID
       );
       tempMsgID = downloading.messageID;
 
-      // Getting download link using Imran API
+      // Forcing payload extraction via Imran API
       const dlRes = await axios.get(
         `https://yt-api-imran.vercel.app/api?url=${video.url}`
       );
 
       const downloadUrl = dlRes.data?.downloadUrl;
-      if (!downloadUrl) throw new Error("Download link not available.");
+      if (!downloadUrl) throw new Error("Direct download stream URL could not be decrypted.");
 
-      // Fetching the video buffer
+      // Intercepting binary stream data
       const buffer = (
         await axios.get(downloadUrl, { responseType: "arraybuffer" })
       ).data;
@@ -79,18 +88,19 @@ module.exports = {
       const cacheDir = path.join(process.cwd(), "cache");
       await fs.ensureDir(cacheDir);
 
-      const filePath = path.join(cacheDir, `video_${Date.now()}.mp4`);
+      const filePath = path.join(cacheDir, `cyber_stream_${Date.now()}.mp4`);
       await fs.writeFile(filePath, buffer);
 
+      // Terminal style presentation layout
       const finalMessage = {
         body:
-          `━━━━━━━━━━━━━━━━━━\n` +
-          `🎬 VIDEO READY\n` +
-          `━━━━━━━━━━━━━━━━━━\n` +
-          `📖 Title: ${video.title}\n` +
-          `⏱ Duration: ${video.time}\n` +
-          `🖌️ Power by: ${creatorName}\n` +
-          `━━━━━━━━━━━━━━━━━━`,
+          `┌────────────────────────┐\n` +
+          `    ☠️ 𝘾𝙔𝘽𝙀𝙍 𝙈𝙀𝘿𝙄𝘼 𝙀𝙓𝙏𝙍𝘼𝘾𝙏𝙀𝘿 ☠️\n` +
+          `└────────────────────────┘\n` +
+          `📦 Packet: ${video.title}\n` +
+          `⏱ Timeline: ${video.time}\n` +
+          `👤 Breached By: ${hackerAlias}\n` +
+          `🛰️ Matrix: Data download complete 🫡`,
         attachment: fs.createReadStream(filePath)
       };
 
@@ -103,7 +113,7 @@ module.exports = {
     } catch (err) {
       if (tempMsgID) await api.unsendMessage(tempMsgID).catch(() => {});
       api.sendMessage(
-        `❌ Failed\n━━━━━━━━━━━━━━━\n${err.message || "An unexpected error occurred."}`,
+        `❌ SYSTEM BREACH CRITICAL\n━━━━━━━━━━━━━━━━━━━━━\n💥 Traceback: ${err.message || "Unknown proxy transmission failure."}`,
         threadID,
         messageID
       );
