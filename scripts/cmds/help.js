@@ -58,7 +58,7 @@ module.exports = {
       categorized[cat].push(cmd.config.name);
     });
 
-    let helpMsg = `🌟 [ 𝗠𝗜𝗟𝗢𝗡 𝗕𝗢𝗧 𝗠𝗘𝗡𝗨 ] 🌟\n`;
+    let helpMsg = `🌟 [ 𝗧𝗢𝗡𝗠𝗢𝗬 𝗕𝗢𝗧 𝗠𝗘𝗡𝗨 ] 🌟\n`;
     helpMsg += `━━━━━━━━━━━━━━━━━━\n\n`;
 
     for (const category in categorized) {
@@ -69,7 +69,7 @@ module.exports = {
     helpMsg += `━━━━━━━━━━━━━━━━━━\n`;
     helpMsg += `📊 Total Commands: ${allCommands.length}\n`;
     helpMsg += `💡 Type "help2 <name>" for details.\n`;
-    helpMsg += `👑 Owner: Milon Hasan`;
+    helpMsg += `👑 Owner: TONMOY CHOWDHURY`;
 
     return api.sendMessage(helpMsg, threadID, messageID);
   }
