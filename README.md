@@ -1,23 +1,49 @@
-<img src="[[[https://files.catbox.moe/c00ufo.jpg](alt="banner">
-<h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px">   𝐂𝐙𝐁 𝐓𝐎𝐍𝐌𝐎𝐘 𝗕𝗢𝗧</h1>
-<!-- Github README -->
+<p align="center">
+  <img src="https://files.catbox.moe/c00ufo.jpg" alt="Banner" width="100%">
+</p>
 
-<p align="center"><img src="https://img.shields.io/badge/𝗜𝗠 𝗧𝗢𝗡𝗠𝗢𝗬 %20BANGLADESHI- 𝗣𝗬𝗧𝗛𝗢𝗡 𝗘𝗫𝗣𝗔𝗥𝗧-green?colorA=%23ff0000&colorB=%23017e40&style=flat-square">
-
-</i></b></h3>
-<h3 align="center">
-  <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="25">
-  &nbsp; 𝗪𝗲𝗹𝗹𝗰𝗼𝗺𝗲 𝗧𝗼𝗻𝗺𝗼𝘆 𝗖𝗵𝗮𝘁 𝗕𝗼𝘁 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 &nbsp;
-  <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="25">
-</h3>
-<img align="center" alt="line" src="https://github.com/DalpatRathore/dalpatrathore/blob/main/assets/images/line-1.svg">
-
-
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%23F70B10&size=27&lines=𝙸+𝙰𝙼+𝙸𝙽𝙽𝙾𝙲𝙴𝙽𝚃+𝙱𝙾𝚈;+𝙸𝚃'𝚜+𝙽𝙾𝚃+𝙹𝚄𝚂𝚃+𝙰+𝙽𝙰𝙼𝙴+𝙱𝚁𝙾;𝙸𝚃'R+A+𝙱𝚁𝙰𝙽𝙳;𝚃𝙷𝙰𝙽𝙺+𝚈𝙾𝚄+𝙴𝚅𝙴𝚁𝚈𝙾𝙽𝙴;𝙻𝙾𝚅e+𝚄+𝙰𝙻𝙻+𝙵𝚁𝙸𝙴𝙽𝙳𝚂)](https://git.io/typing-svg)
+<h1 align="center">
+  <img src="./dashboard/images/logo-non-bg.png" width="28"><br>
+  𝐂𝐙𝐁 𝐓𝐎𝐍𝐌𝐎𝗬 𝗕𝗢𝗧
+</h1>
 
 <p align="center">
-  <img src="http://readme-typing-svg.herokuapp.com?color=cyan&center=true&vCenter=true&multiline=false&lines=`𝗧𝗢𝗡𝗠𝗢𝗬+𝗖𝗛𝗔𝗧+𝗕𝗢𝗧+V2`" alt="">
+  <img src="https://img.shields.io/badge/BANGLADESHI-PYTHON%20EXPERT-green?style=for-the-badge">
 </p>
 
 ---
+
+<h3 align="center">
+  <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="24">
+  Welcome To Tonmoy Chat Bot
+  <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="24">
+</h3>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&pause=1000&color=00F7FF&center=true&vCenter=true&width=700&lines=TONMOY+CHAT+BOT+V2;BANGLADESHI+PYTHON+DEVELOPER;FAST+%7C+SECURE+%7C+POWERFUL;THANK+YOU+FOR+VISITING">
+</p>
+
+---
+
+## 🚀 Features
+
+- 🤖 Fast Messenger Bot
+- ⚡ Auto Reply
+- 💬 Group Support
+- 🔒 Secure System
+- 🎨 Beautiful Dashboard
+- 📈 Easy Setup
+
+---
+
+## 🛠 Languages
+
+<p align="center">
+<img src="https://skillicons.dev/icons?i=python,javascript,nodejs,html,css,git,github,vscode"/>
+</p>
+
+---
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:00C9FF,100:92FE9D&section=footer"/>
+</p>
