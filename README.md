@@ -2,12 +2,12 @@
 <h1 align="center"><img src="./dashboard/images/logo-non-bg.png" width="22px">   𝐂𝐙𝐁 𝐓𝐎𝐍𝐌𝐎𝐘 𝗕𝗢𝗧</h1>
 <!-- Github README -->
 
-<p align="center"><img src="https://img.shields.io/badge/I Am milon from %20BANGLADESHI- NOOB PROGRAMMER-green?colorA=%23ff0000&colorB=%23017e40&style=flat-square">
+<p align="center"><img src="https://img.shields.io/badge/𝗜𝗠 𝗧𝗢𝗡𝗠𝗢𝗬 %20BANGLADESHI- 𝗣𝗬𝗧𝗛𝗢𝗡 𝗘𝗫𝗣𝗔𝗥𝗧-green?colorA=%23ff0000&colorB=%23017e40&style=flat-square">
 
 </i></b></h3>
 <h3 align="center">
   <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="25">
-  &nbsp; ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴍʏ Profile &nbsp;
+  &nbsp; 𝗪𝗲𝗹𝗹𝗰𝗼𝗺𝗲 𝗧𝗼𝗻𝗺𝗼𝘆 𝗖𝗵𝗮𝘁 𝗕𝗼𝘁 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 &nbsp;
   <img src="https://emoji.discord.st/emojis/768b108d-274f-4f44-a634-8477b16efce7.gif" width="25">
 </h3>
 <img align="center" alt="line" src="https://github.com/DalpatRathore/dalpatrathore/blob/main/assets/images/line-1.svg">
