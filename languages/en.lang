@@ -81,41 +81,41 @@ loadScripts.NOT_FOUND=NOT FOUND IN THE ORIGINAL SOURCE CODE:
 loadScripts.NOT_MATCH=DOES NOT MATCH THE ORIGINAL SOURCE CODE:
 
 # bot/login/socketIO.js
-socketIO.connected=Connected to socket.io server
-socketIO.error=An error occurred when connecting to the socket.io server
+socketIO.connected= 𝙲𝙾𝙽𝙽𝙴𝙲𝚃𝙴𝙳 𝚃𝙾 𝚂𝙾𝙲𝙺𝙴𝚃.𝙸𝙾 𝚂𝙴𝚁𝚅𝙴𝚁Connected to socket.io server
+socketIO.error= 𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴𝙳 𝚆𝙷𝙴𝙽 𝙲𝙾𝙽𝙽𝙴𝙲𝚃𝙸𝙽𝙶 𝚃𝙾 𝚃𝙷𝙴 𝚂𝙾𝙲𝙺𝙴𝚃.𝙸𝙾 𝚂𝙴𝚁𝚅𝙴𝚁
 
 # bot/handler/handlerCheckData.js
-handlerCheckData.cantCreateThread=Groups with id '%1' cannot be written to the database!
-handlerCheckData.cantCreateUser=Users with id '%1' cannot be written to the database!
+handlerCheckData.cantCreateThread=𝙶𝚁𝙾𝚄𝙿𝚂 𝚆𝙸𝚃𝙷 𝙸𝙳 '%1' 𝙲𝙰𝙽𝙽𝙾𝚃 𝙱𝙴 𝚆𝚁𝙸𝚃𝚃𝙴𝙽 𝚃𝙾 𝚃𝙷𝙴 BÄŸĴÏĐ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴 !
+handlerCheckData.cantCreateUser=𝚄𝚂𝙴𝚁 𝚆𝙸𝚃𝙷 𝙸𝙳 '%1'  𝙲𝙰𝙽𝙽𝙾𝚃 𝙱𝙴 𝚆𝚁𝙸𝚃𝚃𝙴𝙽 𝚃𝙾 𝚃𝙷𝙴 BÄŸĴÏĐ 𝙳𝙰𝚃𝙰𝙱𝙰𝚂𝙴!
 
 # bot/handler/handlerEvents.js
-handlerEvents.userBanned=You are banned from using the bot.\nReason: %1\nTime: %2\nUser ID: %3
-handlerEvents.threadBanned=This group is banned from using the bot.\nReason: %1\nTime: %2\nThread ID: %3
-handlerEvents.onlyAdminBox=Only group admins can use the bot here.
-handlerEvents.onlyAdminBot=Only bot admins can use the bot.
-handlerEvents.commandNotFound=Unknown command "%1". Type %2help to see commands.
-handlerEvents.commandNotFound2=This command doesn't exist. Type %1help to see commands.
-handlerEvents.commandSyntaxError=Wrong syntax. Type %1help %2 for usage.
-handlerEvents.onlyAdmin=Only group admins can use "%1".
-handlerEvents.onlyAdminToUseOnReply=Only group admins can use reply for "%1".
-handlerEvents.onlyAdminToUseOnReaction=Only group admins can use reactions for "%1".
-handlerEvents.onlyAdminBot2=Only bot admins can use "%1".
-handlerEvents.onlyAdminBot2ToUseOnReply=Only bot admins can use reply for "%1".
-handlerEvents.onlyAdminBot2ToUseOnReaction=Only bot admins can use reactions for "%1".
-handlerEvents.waitingForCommand=Please wait %1s before using this command again.
-handlerEvents.errorOccurred=Error in "%2".\n\n%3
-handlerEvents.errorOccurred2=Error in onChat for "%2".\n\n%3
-handlerEvents.errorOccurred3=Error in onReply for "%2".\n\n%3
-handlerEvents.errorOccurred4=Error in onReaction for "%2".\n\n%3
-handlerEvents.errorOccurred5=Error in event "%2".\n\n%3
-handlerEvents.errorOccurred6=Error in onEvent for "%2".\n\n%3
-handlerEvents.errorOccurred7=Error in onAnyEvent for "%2".\n\n%3
-handlerEvents.cannotFindCommandName=Can't find the command for this reply!
-handlerEvents.cannotFindCommand=Can't find command "%1" for this reply!
+handlerEvents.userBanned= ★彡[ জীবনের সবচেয়ে খারাপ সময় মানুষ জাতি আমাকে দূরে ঠেলে দিলেও, আমার আল্লাহ আমাকে কখনো দূরে ঠেলে দেন নাই। আলহামদুল্লিলাহ।
+ ]彡★
+handlerEvents.threadBanned= *ੈ✩‧₊˚༺ ❝ আল্লাহ তোমাদের চেহারা ও সম্পদের দিকে তাকান না, বরং তিনি তোমাদের অন্তর ও কর্মের দিকে তাকান। ❞(সহিহ মুসলিম: ২৫৬৪) ༻*ੈ✩‧₊˚
+handlerEvents.onlyAdminBox= 𝚃𝙷𝙸𝚂 𝙶𝚁𝙾𝚄𝙿 𝙸𝚂 𝙲𝚄𝚁𝚁𝙴𝙽𝚃𝙻𝚈 𝙾𝙽 𝙶𝚁𝙾𝚄𝙿 𝙰𝙳𝙼𝙸𝙽 𝙼𝙾𝙾𝙳 𝙽𝙾𝚆 SIYAM-𝙱𝙾𝚃-👾 𝙰𝚅𝙰𝙸𝙻𝙰𝙱𝙻𝙴 𝙾𝙽𝙻𝚈 𝙵𝙾𝚁 𝙶𝚁𝙾𝚄𝙿 𝙰𝙳𝙼𝙸𝙽
+handlerEvents.onlyAdminBot=📛 |- 𝙲𝚄𝚁𝚁𝙴𝙽𝚃𝙻𝚈 𝙾𝙽𝙻𝚈 _𝚃𝙰𝙽𝚅𝙸𝚁_ 𝙲𝙰𝙽 𝚄𝚂𝙴 𝚃𝙷𝙴 𝙱𝙾𝚃
+handlerEvents.commandNotFound=𝙲𝙼𝙳 "%1" ╭────────────◊\n👾 𝗩͟𝗜͟͠𝗥𝗨𝗦  𝗔͟𝗟͟͠𝗘𝗥𝗧 \n⦿├─⦿ 𝗦𝗢𝗠𝗘𝗧𝗛𝗜𝗡𝗚 𝗘𝗟𝗦𝗘 🍷👑\n\n- 𝗘͜͡𝗥𝗢𝗢𝗥 🍷🌪️📨\n├─⦿𝗩𝗶𝗲͜͡𝘄 𝗧𝗢𝗡𝗠𝗢𝗬 𝗔𝗟𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 🎭👾\n👾\n╰────────────◊
+handlerEvents.commandNotFound2= ╭────────────◊\n👾 𝗩͟𝗜͟͠𝗥𝗨𝗦  𝗔͟𝗟͟͠𝗘𝗥𝗧 \n⦿├─⦿ 𝗦𝗢𝗠𝗘𝗧𝗛𝗜𝗡𝗚 𝗘𝗟𝗦𝗘 🍷👑\n\n- 𝗘͜͡𝗥𝗢𝗢𝗥 🍷🌪️📨\n├─⦿𝗩𝗶𝗲͜͡𝘄 𝗧𝗢𝗡𝗠𝗢𝗬 𝗔𝗟𝗟 𝗖𝗢𝗠𝗠𝗔𝗡𝗗 🎭👾\n👾\n╰────────────◊
+handlerEvents.commandSyntaxError= 𝚃𝙷𝙴  𝗧𝗢𝗡𝗠𝗢𝗬-𝙱𝙾𝚃-👾 𝙲𝙼𝙳 𝙰𝚁𝙴 𝚈𝙾𝚄 𝚄𝚂𝙸𝙽𝙶 𝙸𝚂 𝚆𝚁𝙾𝙽𝙶 𝚂𝚈𝙽𝚃𝙰𝚇, 𝙿𝙻𝙴𝙰𝚂𝙴 𝚃𝚈𝙿𝙴 %1𝙷𝙴𝙻𝙿 %2 𝚃𝙾 𝚂𝙴𝙴 𝚃𝙷𝙴 𝙳𝙴𝚃𝙰𝙸𝙻𝚂 𝙾𝙵  𝗧𝗢𝗡𝗠𝗢𝗬-𝙱𝙾𝚃-👾 𝙰𝙻𝙻 𝙲𝙼𝙳𝚂 𝙰𝙽𝙳 𝙷𝙾𝚆 𝚃𝙾 𝚄𝚂𝙴 𝙲𝙼𝙳
+handlerEvents.onlyAdmin=📛 |- 𝙾𝙽𝙻𝚈 boss  𝗧𝗢𝗡𝗠𝗢𝗬 𝙲𝙰𝙽 𝚄𝚂𝙴 𝚃𝙷𝙴 𝙲𝙼𝙳 "%1"
+handlerEvents.onlyAdminToUseOnReply=📛 |- 𝙾𝙽𝙻𝚈 boss  𝗧𝗢𝗡𝗠𝗢𝗬 𝙲𝙰𝙽 𝚄𝚂𝙴 𝚃𝙷𝙴 𝙲𝚁𝚁𝙿𝙻𝚈 𝙵𝚄𝙽𝙲𝚃𝙸𝙾𝙽 𝙾𝙵 𝚃𝙷𝙴 𝙲𝙼𝙳 "%1"
+handlerEvents.onlyAdminToUseOnReaction=📛 |- 𝙾𝙽𝙻𝚈  𝗧𝗢𝗡𝗠𝗢𝗬 𝙲𝙰𝙽 𝚄𝚂𝙴 𝚃𝙷𝙴 𝚁𝚁𝙰𝙲𝚃𝙸𝙾𝙼 𝙵𝚄𝙽𝙲𝚃𝙸𝙾𝙽 𝙾𝙵 𝚃𝙷𝙴 𝙲𝙼𝙳  "%1"
+handlerEvents.onlyAdminBot2=📛 |- 𝙷𝙰𝙷𝙰𝙷𝙰 𝚃𝙷𝙸𝚂 𝙲𝙼𝙳 𝚄𝚂𝙸𝙽𝙶 𝙾𝙽𝙻𝚈 𝙰𝙳𝙼𝙸𝙽 "%1"
+handlerEvents.onlyAdminBot2ToUseOnReply=📛 |- 𝙷𝙰𝙷𝙰𝙷𝙰 𝙾𝙽𝙻𝚈  𝗧𝗢𝗡𝗠𝗢𝗬👾 𝙰𝙳𝙼𝙸𝙽 𝚇𝙰𝙽 𝚄𝚂𝙴 𝚃𝙷𝙴 𝚁𝙴𝙿𝙻𝚈 𝙵𝚄𝙽𝙲𝚃𝙸𝙾𝙽 𝙾𝙵 𝚃𝙷𝙴 𝙲𝙼𝙳 "%1"
+handlerEvents.onlyAdminBot2ToUseOnReaction=📛 |- 𝙷𝙰𝙷𝙰𝙷𝙷𝙰 𝚃𝙷𝙸𝚂 𝙲𝙼𝙳 𝚄𝚂𝙸𝙽𝙶 𝙾𝙽𝙻𝚈 _ 𝗧𝗢𝗡𝗠𝗢𝗬_ "%1"
+handlerEvents.waitingForCommand=⏱|- 𝚈𝙾𝚄 𝙰𝚁𝙴 𝙸𝙽 𝚃𝙷𝙴 𝚆𝙰𝙸𝚃𝙸𝙽𝙶 𝚃𝙸𝙼𝙴 𝚃𝙾 𝚄𝚂𝙴 𝚃𝙷𝙸𝚂 𝙲𝙼𝙳 𝙿𝙻𝙴𝙰𝚂𝙴 𝙲𝙾𝙼𝙴 𝙱𝙰𝙲𝙺 𝙰𝙵𝚃𝙴𝚁 %1\ - 𝚂𝙿𝙰𝙼 𝙺𝙾𝚁𝙻𝙴 𝚃𝚄𝙸 𝙶𝙰𝚈/𝙻𝙴𝚂𝙱𝙸𝙰𝙽-🤡
+handlerEvents.errorOccurred=📛 [ %1 ]\n𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴𝙳 𝙰𝚃 𝙲𝙼𝙳 "%2"\n\n%3
+handlerEvents.errorOccurred2=📛 [ %1 ]\n𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝙰𝚃 𝙲𝙼𝙳 𝙾𝙽𝙲𝙷𝙰𝚃 "%2"\n\n%3
+handlerEvents.errorOccurred3=📛 [ %1 ]\n𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝚆𝙷𝙴𝙽 𝙴𝚇𝙴𝙲𝚄𝚃𝙸𝙽𝙶 𝙾𝙽𝚁𝙴𝙿𝙻𝚈 𝙰𝚃 𝙲𝙼𝙳"%2"\n\n%3
+handlerEvents.errorOccurred4=📛 [ %1 ]\n𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝚆𝙷𝙴𝙽 𝙴𝚇𝙴𝙲𝚄𝚃𝙸𝙽𝙶 𝙾𝙽𝙰𝚁𝙴𝙰𝙲𝚃𝙸𝙾𝙽 𝙰𝚃 𝙲𝙼𝙳"%2"\n\n%3
+handlerEvents.errorOccurred5=📛 [ %1 ]\n𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝚆𝙷𝙴𝙽 𝙴𝚇𝙴𝙲𝚄𝚃𝙸𝙽𝙶 𝙾𝙽𝙴𝚅𝙴𝙽𝚃 𝙰𝚃 𝙲𝙼𝙳 "%2"\n\n%3
+handlerEvents.errorOccurred6=📛 [ %1 ]\n𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝚆𝙷𝙴𝙽 𝙴𝚇𝙴𝙲𝚄𝚃𝙸𝙽𝙶 𝙾𝙽𝙴𝚅𝙴𝙽𝚃 𝙰𝚃 𝙲𝙼𝙳 "%2"\n\n%3
+handlerEvents.errorOccurred7=📛 [ %1 ]\n𝙰𝚗 𝙴𝚁𝚁𝙾𝚁 𝙾𝙲𝙲𝚄𝚁𝚁𝙴 𝚆𝙷𝙴𝙽 𝙴𝚇𝙴𝙲𝚄𝚃𝙸𝙽𝙶 𝙾𝙽𝙰𝙽𝚈𝙴𝚅𝙴𝙽𝚃 𝙰𝚃 𝙲𝙼𝙳"%2"\n\n%3
+handlerEvents.cannotFindCommandName=📛 𝙲𝙰𝙽𝙽𝙾𝚃 𝙵𝙸𝙽𝙳 𝙲𝙼𝙳 𝚃𝙾 𝙴𝚇𝙴𝙲𝚄𝚃𝙴 𝚃𝙷𝙸𝚂 𝚁𝙴𝙿𝙻𝚈!
+handlerEvents.cannotFindCommand=📛 𝙲𝙰𝙽𝙽𝙾𝚃 𝙵𝙸𝙽𝙳 𝙲𝙼𝙳 "%1" 𝚃𝙾 𝙴𝚇𝙴𝙲𝚄𝚃𝙴 𝚃𝙷𝙸𝚂 𝚁𝙴𝙿𝙻𝚈!
 
 # bot/autoUptime.js
 autoUptime.autoUptimeTurnedOn=AutoUptime mode turned on
-
 # database/controller/index.js
 indexController.connectingMongoDB=Connecting a MONGODB database
 indexController.connectMongoDBSuccess=Successfully connected mongodb database!
@@ -140,8 +140,8 @@ updater.skipFile=There is a new version of the %1 file, but you have skipped thi
 # dashboard/routes/verifyfbid.js
 verifyfbid.sendCode=Your verification code is:\n%1\nThe verification code is valid for %2 minutes
 
-# utils.js
-utils.errorOccurred=❌ An error occurred:\n\n%1
+# utils.js=
+utils.errorOccurred= An error occurred:\n\n%1
 
 # for command
 command.restartedBot=Bot has been restarted
